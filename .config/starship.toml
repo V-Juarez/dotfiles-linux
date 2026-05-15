@@ -19,7 +19,7 @@ show_always = false
 
 [sudo]
 style = "bold red"
-symbol = " "
+symbol = "  "
 disabled = false
 
 format = """
