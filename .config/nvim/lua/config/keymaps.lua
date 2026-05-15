@@ -3,6 +3,16 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+-- Set our leader keybinding to space
+-- Anywhere you see <leader> in a keymapping specifies the space key
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- Remove search highlights after searching
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Remove search highlights" })
+
+-- Exit Vim's terminal mode
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- Map Ctrl+b in insert mode to delete to the end of the word without leaving insert mode
 vim.keymap.set("i", "<C-b>", "<C-o>de")
@@ -16,12 +26,12 @@ vim.keymap.set({ "n" }, "<leader>uk", "<cmd>Screenkey<CR>")
 ----- Tmux Navigation ------
 local nvim_tmux_nav = require("nvim-tmux-navigation")
 
-vim.keymap.set("n", "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft) -- Navigate to the left pane
-vim.keymap.set("n", "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown) -- Navigate to the bottom pane
-vim.keymap.set("n", "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp) -- Navigate to the top pane
-vim.keymap.set("n", "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight) -- Navigate to the right pane
+vim.keymap.set("n", "<C-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)        -- Navigate to the left pane
+vim.keymap.set("n", "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)        -- Navigate to the bottom pane
+vim.keymap.set("n", "<C-k>", nvim_tmux_nav.NvimTmuxNavigateUp)          -- Navigate to the top pane
+vim.keymap.set("n", "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)       -- Navigate to the right pane
 vim.keymap.set("n", "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive) -- Navigate to the last active pane
-vim.keymap.set("n", "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext) -- Navigate to the next pane
+vim.keymap.set("n", "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)    -- Navigate to the next pane
 
 ----- OBSIDIAN -----
 vim.keymap.set("n", "<leader>oc", "<cmd>ObsidianCheck<CR>", { desc = "Obsidian Check Checkbox" })
@@ -152,11 +162,11 @@ function SaveFile()
 
   local filename = vim.fn.expand("%:t") -- Get only the filename
   local success, err = pcall(function()
-    vim.cmd("silent! write") -- Try to save the file without showing the default message
+    vim.cmd("silent! write")            -- Try to save the file without showing the default message
   end)
 
   if success then
-    vim.notify(filename .. " Saved!") -- Show only the custom message if successful
+    vim.notify(filename .. " Saved!")                  -- Show only the custom message if successful
   else
     vim.notify("Error: " .. err, vim.log.levels.ERROR) -- Show the error message if it fails
   end

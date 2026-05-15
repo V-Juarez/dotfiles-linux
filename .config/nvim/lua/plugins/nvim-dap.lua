@@ -175,11 +175,6 @@ return {
         return vim.json.decode(json.json_strip_comments(str))
       end
 
-      -- Load launch configurations from .vscode/launch.json if it exists
-      if vim.fn.filereadable(".vscode/launch.json") then
-        vscode.load_launchjs()
-      end
-
       -- Function to load environment variables
       local function load_env_variables()
         local variables = {}
